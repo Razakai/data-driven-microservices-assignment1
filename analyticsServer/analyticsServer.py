@@ -35,7 +35,8 @@ def run():
     authorDict = {}
     authorWithMostDeletedPosts = ""
 
-    with grpc.insecure_channel('localhost:50051') as channel:
+    #with grpc.insecure_channel('grpc_server:50051') as channel:
+    with grpc.insecure_channel('grpc_server:50051') as channel:
         stub = streamServer_pb2_grpc.DatastreamerStub(channel)
         #response = stub.GetData(streamServer_pb2.DataRequest(name='you'))
         for line in stub.GetData(streamServer_pb2.DataRequest(name='you')):

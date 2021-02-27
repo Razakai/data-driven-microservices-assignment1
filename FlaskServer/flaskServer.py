@@ -7,7 +7,7 @@ import grpc
 import streamServer_pb2
 import streamServer_pb2_grpc
 
-channel = grpc.insecure_channel('localhost:50051')
+channel = grpc.insecure_channel('grpc_server:50051')
 stub = streamServer_pb2_grpc.DatastreamerStub(channel)
 
 

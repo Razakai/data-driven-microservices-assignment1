@@ -1,0 +1,24 @@
+version: '3'
+services: 
+  grpc_server:
+    build:
+      context: ./streamServer
+      dockerfile: Server.Dockerfile
+    ports:
+      - "50051:50051"
+  flask_server:
+    build:
+      context: ./FlaskServer
+      dockerfile: Flask.Dockerfile
+    ports: 
+      - "5000:5000"
+    depends_on: 
+      - "grpc_server"
+    command: ["./wait-for-it.sh", "grpc_server:50051", "--", "python", "flaskServer.py"]
+  analytics_server:
+    build:
+      context: ./analyticsServer
+      dockerfile: Analytics.Dockerfile
+    depends_on: 
+      - "grpc_server"
+    command: ["./wait-for-it.sh", "grpc_server:50051", "--", "python", "analyticsServer.py"]

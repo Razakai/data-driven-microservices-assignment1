@@ -32,7 +32,7 @@ class Datastreamer(streamServer_pb2_grpc.DatastreamerServicer):
 
 
     def GetData(self, request, context):
-        dataframe = pd.read_csv('../r_dataisbeautiful_posts.csv')
+        dataframe = pd.read_csv('r_dataisbeautiful_posts.csv')
         for line in dataframe.values:
             arr = [str(val) for val in line]
             time.sleep(5)
@@ -54,14 +54,14 @@ class Datastreamer(streamServer_pb2_grpc.DatastreamerServicer):
         self.avgWordsPerPost = request.avgWordsPerPost
         self.postWithMostWords = request.postWithMostWords
         self.authorWithMostDeletedPosts = request.authorWithMostDeletedPosts
-        print(self.avgWordsPerPost, self.postWithMostWords, self.authorWithMostDeletedPosts)
+        #print(self.avgWordsPerPost, self.postWithMostWords, self.authorWithMostDeletedPosts)
 
         return streamServer_pb2.Confirmation(confirm="True")
     
 
     def UpdateRollingAnalytics(self, request, context):
         self.avgWordLength = request.avgWordLength
-        print(self.avgWordLength)
+        #print(self.avgWordLength)
 
         return streamServer_pb2.Confirmation(confirm="True")
     
