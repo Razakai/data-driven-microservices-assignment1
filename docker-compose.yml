@@ -15,10 +15,25 @@ services:
     depends_on: 
       - "grpc_server"
     command: ["./wait-for-it.sh", "grpc_server:50051", "--", "python", "flaskServer.py"]
+  mysql:
+    image: mysql:latest
+    ports:
+        - "3306:3306"
+    volumes:
+        - ./data/application/init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+        MYSQL_ROOT_USER: "admin"
+        MYSQL_ROOT_PASSWORD: "admin"
+        MYSQL_DATABASE: "microservice"
   analytics_server:
     build:
       context: ./analyticsServer
       dockerfile: Analytics.Dockerfile
+    links:
+      - "mysql:mysql"
     depends_on: 
       - "grpc_server"
+      - "mysql"
     command: ["./wait-for-it.sh", "grpc_server:50051", "--", "python", "analyticsServer.py"]
+    command: ["./wait-for-it.sh", "mysql:3306", "--", "python", "analyticsServer.py"]

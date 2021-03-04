@@ -5,10 +5,12 @@ import grpc
 
 import streamServer_pb2
 import streamServer_pb2_grpc
+from database.queries import setData
+import asyncio
 
 
 
-def run():
+async def run():
     # NOTE(gRPC Python Team): .close() is possible on a channel and should be
     # used in circumstances in which the with statement does not fit the needs
     # of the code.
@@ -46,23 +48,6 @@ def run():
             totalWords += len(words)
             totalPosts += 1
 
-            # Metric 2
-            itteration += 1
-
-            # Reset every 3 min
-            if (timePerItter * itteration) >= 180:
-                stub.UpdateRollingAnalytics(streamServer_pb2.RollingAnalyticsRequest(
-                    avgWordLength=str(int(numLetters/threeMinWordCount))
-                ))
-
-                itteration = 0
-                threeMinWordCount = 0
-                numLetters = 0
-
-            
-            threeMinWordCount += len(words)
-            numLetters += len(list(''.join(words)))
-
             # Metric 3
             if len(words) > mostWordsInTitle:
                 mostWordsInTitle = len(words)
@@ -80,16 +65,43 @@ def run():
             for key in authorDict.keys():
                 authorWithMostDeletedPosts = key
                 break
+
+             # Metric 2
+            itteration += 1
+
+            # Reset every 3 min
+            if (timePerItter * itteration) >= 180:
+                await setData(str(int(totalWords/totalPosts)), str(longestTitle), str(authorWithMostDeletedPosts), str(int(numLetters/threeMinWordCount)))
+
+
+
+
+                '''stub.UpdateRollingAnalytics(streamServer_pb2.RollingAnalyticsRequest(
+                    avgWordLength=str(int(numLetters/threeMinWordCount))
+                ))'''
+
+                itteration = 0
+                threeMinWordCount = 0
+                numLetters = 0
             
-            # UpdateRealTimeAnalytics
-            stub.UpdateRealTimeAnalytics(streamServer_pb2.RealTimeAnalyticsRequest(
-                avgWordsPerPost=str(int(totalWords/totalPosts)),
-                postWithMostWords=str(longestTitle),
-                authorWithMostDeletedPosts=str(authorWithMostDeletedPosts)
-            ))
+            else:
+
+                await setData(str(int(totalWords/totalPosts)), str(longestTitle), str(authorWithMostDeletedPosts))
+
+                ''' # UpdateRealTimeAnalytics
+                stub.UpdateRealTimeAnalytics(streamServer_pb2.RealTimeAnalyticsRequest(
+                    avgWordsPerPost=str(int(totalWords/totalPosts)),
+                    postWithMostWords=str(longestTitle),
+                    authorWithMostDeletedPosts=str(authorWithMostDeletedPosts)
+                ))'''
+
+            
+            threeMinWordCount += len(words)
+            numLetters += len(list(''.join(words)))
+
 
         
 
 if __name__ == '__main__':
     logging.basicConfig()
-    run()
+    asyncio.run(run())
