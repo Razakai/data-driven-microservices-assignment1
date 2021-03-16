@@ -1,4 +1,4 @@
 grpcio-tools
 grpcio
 googleapis-common-protos
-databases[mysql]~=0.4.1
+mysql-connector-python

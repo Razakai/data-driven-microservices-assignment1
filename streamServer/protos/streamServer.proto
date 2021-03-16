@@ -6,31 +6,10 @@ package streamServer;
 
 service Datastreamer {
     rpc GetData (DataRequest) returns (stream DataResponse) {}
-    rpc UpdateRealTimeAnalytics (RealTimeAnalyticsRequest) returns (Confirmation) {}
-    rpc UpdateRollingAnalytics (RollingAnalyticsRequest) returns (Confirmation) {}
-    rpc GetAnalytics (DataRequest) returns (AnalyticsResponse) {}
 }
 
 message DataRequest{
     string name = 1;
-}
-
-message AnalyticsResponse{
-    string analytics = 1;
-}
-
-message RollingAnalyticsRequest{
-    string avgWordLength = 1;
-}
-
-message Confirmation{
-    string confirm = 1;
-}
-
-message RealTimeAnalyticsRequest{
-    string avgWordsPerPost = 1;
-    string postWithMostWords = 2;
-    string authorWithMostDeletedPosts = 3;
 }
 
 message DataResponse{

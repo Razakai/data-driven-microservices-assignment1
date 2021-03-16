@@ -1,35 +1,34 @@
 from database.database import fetch, execute
 
-async def getData() -> dict:
+def getData() -> None:
     query = "SELECT * FROM data"
-    res = await fetch(query=query, isOne=True)
-    return dict(res) if res is not None else {}
+    res = fetch(query)
+    print(res)
 
 
-async def setData(avgWordsPerPost, postWithMostWords, authorWithMostDeletedPosts, avgWordLength=None) -> None:
+def setData(avgWordsPerPost, postWithMostWords, authorWithMostDeletedPosts, avgWordLength=None) -> None:
     query = ""
-    values = {}
+    values = ()
     if avgWordLength is not None:
-
 
         query = """UPDATE data 
         SET
-        avgWordsPerPost = :avgWordsPerPost,
-        postWithMostWords = :postWithMostWords,
-        authorWithMostDeletedPosts = :authorWithMostDeletedPosts,
-        avgWordLength = :avgWordLength
+        avgWordsPerPost = %s,
+        postWithMostWords = %s,
+        authorWithMostDeletedPosts = %s,
+        avgWordLength = %s
         WHERE rowID = 1
         """
-        values = {"avgWordsPerPost": avgWordsPerPost, "postWithMostWords": postWithMostWords, "authorWithMostDeletedPosts": authorWithMostDeletedPosts, "avgWordLength": avgWordLength}
+        values = (avgWordsPerPost, postWithMostWords, authorWithMostDeletedPosts, avgWordLength)
     else:
         query = """UPDATE data 
         SET
-        avgWordsPerPost = :avgWordsPerPost,
-        postWithMostWords = :postWithMostWords,
-        authorWithMostDeletedPosts = :authorWithMostDeletedPosts
+        avgWordsPerPost = %s,
+        postWithMostWords = %s,
+        authorWithMostDeletedPosts = %s
         WHERE rowID = 1
         """
-        values = {"avgWordsPerPost": avgWordsPerPost, "postWithMostWords": postWithMostWords, "authorWithMostDeletedPosts": authorWithMostDeletedPosts}
+        values = (avgWordsPerPost, postWithMostWords, authorWithMostDeletedPosts)
     
-    await execute(query=query, isMany=False, values=values)
+    execute(query, values)
 

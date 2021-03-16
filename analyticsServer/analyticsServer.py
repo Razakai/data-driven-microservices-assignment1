@@ -5,12 +5,11 @@ import grpc
 
 import streamServer_pb2
 import streamServer_pb2_grpc
-from database.queries import setData
-import asyncio
+from database.queries import setData, getData
 
 
 
-async def run():
+def run():
     # NOTE(gRPC Python Team): .close() is possible on a channel and should be
     # used in circumstances in which the with statement does not fit the needs
     # of the code.
@@ -43,6 +42,8 @@ async def run():
         #response = stub.GetData(streamServer_pb2.DataRequest(name='you'))
         for line in stub.GetData(streamServer_pb2.DataRequest(name='you')):
             # Metric 1
+            getData()
+
             title = line.title.strip()
             words = title.split(" ")
             totalWords += len(words)
@@ -71,7 +72,7 @@ async def run():
 
             # Reset every 3 min
             if (timePerItter * itteration) >= 180:
-                await setData(str(int(totalWords/totalPosts)), str(longestTitle), str(authorWithMostDeletedPosts), str(int(numLetters/threeMinWordCount)))
+                setData(str(int(totalWords/totalPosts)), str(longestTitle), str(authorWithMostDeletedPosts), str(int(numLetters/threeMinWordCount)))
 
 
 
@@ -86,7 +87,7 @@ async def run():
             
             else:
 
-                await setData(str(int(totalWords/totalPosts)), str(longestTitle), str(authorWithMostDeletedPosts))
+                setData(str(int(totalWords/totalPosts)), str(longestTitle), str(authorWithMostDeletedPosts))
 
                 ''' # UpdateRealTimeAnalytics
                 stub.UpdateRealTimeAnalytics(streamServer_pb2.RealTimeAnalyticsRequest(
@@ -104,4 +105,4 @@ async def run():
 
 if __name__ == '__main__':
     logging.basicConfig()
-    asyncio.run(run())
+    run()

@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'P\001\242\002\003HLW',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x12streamServer.proto\x12\x0cstreamServer\"\x1b\n\x0b\x44\x61taRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"&\n\x11\x41nalyticsResponse\x12\x11\n\tanalytics\x18\x01 \x01(\t\"0\n\x17RollingAnalyticsRequest\x12\x15\n\ravgWordLength\x18\x01 \x01(\t\"\x1f\n\x0c\x43onfirmation\x12\x0f\n\x07\x63onfirm\x18\x01 \x01(\t\"r\n\x18RealTimeAnalyticsRequest\x12\x17\n\x0f\x61vgWordsPerPost\x18\x01 \x01(\t\x12\x19\n\x11postWithMostWords\x18\x02 \x01(\t\x12\"\n\x1a\x61uthorWithMostDeletedPosts\x18\x03 \x01(\t\"\xf7\x01\n\x0c\x44\x61taResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\r\n\x05score\x18\x03 \x01(\t\x12\x0e\n\x06\x61uthor\x18\x04 \x01(\t\x12\x19\n\x11\x61uthor_flair_text\x18\x05 \x01(\t\x12\x12\n\nremoved_by\x18\x06 \x01(\t\x12\x1d\n\x15total_awards_received\x18\x07 \x01(\t\x12\x10\n\x08\x61warders\x18\x08 \x01(\t\x12\x13\n\x0b\x63reated_utc\x18\t \x01(\t\x12\x11\n\tfull_link\x18\n \x01(\t\x12\x14\n\x0cnum_comments\x18\x0b \x01(\t\x12\x0f\n\x07over_18\x18\x0c \x01(\t2\xe2\x02\n\x0c\x44\x61tastreamer\x12\x44\n\x07GetData\x12\x19.streamServer.DataRequest\x1a\x1a.streamServer.DataResponse\"\x00\x30\x01\x12_\n\x17UpdateRealTimeAnalytics\x12&.streamServer.RealTimeAnalyticsRequest\x1a\x1a.streamServer.Confirmation\"\x00\x12]\n\x16UpdateRollingAnalytics\x12%.streamServer.RollingAnalyticsRequest\x1a\x1a.streamServer.Confirmation\"\x00\x12L\n\x0cGetAnalytics\x12\x19.streamServer.DataRequest\x1a\x1f.streamServer.AnalyticsResponse\"\x00\x42\x08P\x01\xa2\x02\x03HLWb\x06proto3'
+  serialized_pb=b'\n\x12streamServer.proto\x12\x0cstreamServer\"\x1b\n\x0b\x44\x61taRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\xf7\x01\n\x0c\x44\x61taResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\r\n\x05score\x18\x03 \x01(\t\x12\x0e\n\x06\x61uthor\x18\x04 \x01(\t\x12\x19\n\x11\x61uthor_flair_text\x18\x05 \x01(\t\x12\x12\n\nremoved_by\x18\x06 \x01(\t\x12\x1d\n\x15total_awards_received\x18\x07 \x01(\t\x12\x10\n\x08\x61warders\x18\x08 \x01(\t\x12\x13\n\x0b\x63reated_utc\x18\t \x01(\t\x12\x11\n\tfull_link\x18\n \x01(\t\x12\x14\n\x0cnum_comments\x18\x0b \x01(\t\x12\x0f\n\x07over_18\x18\x0c \x01(\t2T\n\x0c\x44\x61tastreamer\x12\x44\n\x07GetData\x12\x19.streamServer.DataRequest\x1a\x1a.streamServer.DataResponse\"\x00\x30\x01\x42\x08P\x01\xa2\x02\x03HLWb\x06proto3'
 )
 
 
@@ -54,148 +54,6 @@ _DATAREQUEST = _descriptor.Descriptor(
   ],
   serialized_start=36,
   serialized_end=63,
-)
-
-
-_ANALYTICSRESPONSE = _descriptor.Descriptor(
-  name='AnalyticsResponse',
-  full_name='streamServer.AnalyticsResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='analytics', full_name='streamServer.AnalyticsResponse.analytics', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=65,
-  serialized_end=103,
-)
-
-
-_ROLLINGANALYTICSREQUEST = _descriptor.Descriptor(
-  name='RollingAnalyticsRequest',
-  full_name='streamServer.RollingAnalyticsRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='avgWordLength', full_name='streamServer.RollingAnalyticsRequest.avgWordLength', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=105,
-  serialized_end=153,
-)
-
-
-_CONFIRMATION = _descriptor.Descriptor(
-  name='Confirmation',
-  full_name='streamServer.Confirmation',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='confirm', full_name='streamServer.Confirmation.confirm', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=155,
-  serialized_end=186,
-)
-
-
-_REALTIMEANALYTICSREQUEST = _descriptor.Descriptor(
-  name='RealTimeAnalyticsRequest',
-  full_name='streamServer.RealTimeAnalyticsRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='avgWordsPerPost', full_name='streamServer.RealTimeAnalyticsRequest.avgWordsPerPost', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='postWithMostWords', full_name='streamServer.RealTimeAnalyticsRequest.postWithMostWords', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='authorWithMostDeletedPosts', full_name='streamServer.RealTimeAnalyticsRequest.authorWithMostDeletedPosts', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=188,
-  serialized_end=302,
 )
 
 
@@ -303,15 +161,11 @@ _DATARESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=305,
-  serialized_end=552,
+  serialized_start=66,
+  serialized_end=313,
 )
 
 DESCRIPTOR.message_types_by_name['DataRequest'] = _DATAREQUEST
-DESCRIPTOR.message_types_by_name['AnalyticsResponse'] = _ANALYTICSRESPONSE
-DESCRIPTOR.message_types_by_name['RollingAnalyticsRequest'] = _ROLLINGANALYTICSREQUEST
-DESCRIPTOR.message_types_by_name['Confirmation'] = _CONFIRMATION
-DESCRIPTOR.message_types_by_name['RealTimeAnalyticsRequest'] = _REALTIMEANALYTICSREQUEST
 DESCRIPTOR.message_types_by_name['DataResponse'] = _DATARESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -321,34 +175,6 @@ DataRequest = _reflection.GeneratedProtocolMessageType('DataRequest', (_message.
   # @@protoc_insertion_point(class_scope:streamServer.DataRequest)
   })
 _sym_db.RegisterMessage(DataRequest)
-
-AnalyticsResponse = _reflection.GeneratedProtocolMessageType('AnalyticsResponse', (_message.Message,), {
-  'DESCRIPTOR' : _ANALYTICSRESPONSE,
-  '__module__' : 'streamServer_pb2'
-  # @@protoc_insertion_point(class_scope:streamServer.AnalyticsResponse)
-  })
-_sym_db.RegisterMessage(AnalyticsResponse)
-
-RollingAnalyticsRequest = _reflection.GeneratedProtocolMessageType('RollingAnalyticsRequest', (_message.Message,), {
-  'DESCRIPTOR' : _ROLLINGANALYTICSREQUEST,
-  '__module__' : 'streamServer_pb2'
-  # @@protoc_insertion_point(class_scope:streamServer.RollingAnalyticsRequest)
-  })
-_sym_db.RegisterMessage(RollingAnalyticsRequest)
-
-Confirmation = _reflection.GeneratedProtocolMessageType('Confirmation', (_message.Message,), {
-  'DESCRIPTOR' : _CONFIRMATION,
-  '__module__' : 'streamServer_pb2'
-  # @@protoc_insertion_point(class_scope:streamServer.Confirmation)
-  })
-_sym_db.RegisterMessage(Confirmation)
-
-RealTimeAnalyticsRequest = _reflection.GeneratedProtocolMessageType('RealTimeAnalyticsRequest', (_message.Message,), {
-  'DESCRIPTOR' : _REALTIMEANALYTICSREQUEST,
-  '__module__' : 'streamServer_pb2'
-  # @@protoc_insertion_point(class_scope:streamServer.RealTimeAnalyticsRequest)
-  })
-_sym_db.RegisterMessage(RealTimeAnalyticsRequest)
 
 DataResponse = _reflection.GeneratedProtocolMessageType('DataResponse', (_message.Message,), {
   'DESCRIPTOR' : _DATARESPONSE,
@@ -367,8 +193,8 @@ _DATASTREAMER = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=555,
-  serialized_end=909,
+  serialized_start=315,
+  serialized_end=399,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetData',
@@ -377,36 +203,6 @@ _DATASTREAMER = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_DATAREQUEST,
     output_type=_DATARESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='UpdateRealTimeAnalytics',
-    full_name='streamServer.Datastreamer.UpdateRealTimeAnalytics',
-    index=1,
-    containing_service=None,
-    input_type=_REALTIMEANALYTICSREQUEST,
-    output_type=_CONFIRMATION,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='UpdateRollingAnalytics',
-    full_name='streamServer.Datastreamer.UpdateRollingAnalytics',
-    index=2,
-    containing_service=None,
-    input_type=_ROLLINGANALYTICSREQUEST,
-    output_type=_CONFIRMATION,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetAnalytics',
-    full_name='streamServer.Datastreamer.GetAnalytics',
-    index=3,
-    containing_service=None,
-    input_type=_DATAREQUEST,
-    output_type=_ANALYTICSRESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
