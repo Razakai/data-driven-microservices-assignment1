@@ -17,6 +17,7 @@ from concurrent import futures
 import logging
 import time
 import grpc
+import random
 
 import streamServer_pb2
 import streamServer_pb2_grpc
@@ -24,18 +25,14 @@ import pandas as pd
 
 
 class Datastreamer(streamServer_pb2_grpc.DatastreamerServicer):
-    def __init__(self):
-        self.avgWordsPerPost = ""
-        self.postWithMostWords = ""
-        self.authorWithMostDeletedPosts = ""
-        self.avgWordLength = ""
-
-
     def GetData(self, request, context):
         dataframe = pd.read_csv('r_dataisbeautiful_posts.csv')
-        for line in dataframe.values:
+        for idx, line in enumerate(dataframe.values):
+            if idx % 2 == 0:
+                time.sleep(random.randint(1, 5))
+            
             arr = [str(val) for val in line]
-            time.sleep(5)
+            
             yield streamServer_pb2.DataResponse(
                 id=arr[0],
                 title=arr[1],
@@ -49,29 +46,6 @@ class Datastreamer(streamServer_pb2_grpc.DatastreamerServicer):
                 full_link=arr[9],
                 num_comments=arr[10],
                 over_18=arr[11])
-    
-    def UpdateRealTimeAnalytics(self, request, context):
-        self.avgWordsPerPost = request.avgWordsPerPost
-        self.postWithMostWords = request.postWithMostWords
-        self.authorWithMostDeletedPosts = request.authorWithMostDeletedPosts
-        #print(self.avgWordsPerPost, self.postWithMostWords, self.authorWithMostDeletedPosts)
-
-        return streamServer_pb2.Confirmation(confirm="True")
-    
-
-    def UpdateRollingAnalytics(self, request, context):
-        self.avgWordLength = request.avgWordLength
-        #print(self.avgWordLength)
-
-        return streamServer_pb2.Confirmation(confirm="True")
-    
-
-    def GetAnalytics(self, request, context):
-        return streamServer_pb2.AnalyticsResponse(
-            analytics=f'Average words per post: {self.avgWordsPerPost}\nPost title with most words: {self.postWithMostWords}\nAuthor with most deleted posts: {self.authorWithMostDeletedPosts}\nAverage word length: {self.avgWordLength}\n')
-
-        
-        #return streamServer_pb2.DataResponse(message='Hello, %s!' % request.name)
 
 
 def serve():

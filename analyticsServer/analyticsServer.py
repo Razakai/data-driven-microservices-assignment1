@@ -2,6 +2,7 @@ from __future__ import print_function
 import logging
 
 import grpc
+import time
 
 import streamServer_pb2
 import streamServer_pb2_grpc
@@ -21,8 +22,7 @@ def run():
 
     # Metric 2
     # rolling 3 minute metric - average word length
-    itteration = 0
-    timePerItter = 5
+    startTime = time.time()
     threeMinWordCount = 0
     numLetters = 0
 
@@ -68,40 +68,20 @@ def run():
                 break
 
              # Metric 2
-            itteration += 1
-
             # Reset every 3 min
-            if (timePerItter * itteration) >= 180:
+            if (int(time.time() - startTime)) >= 180:
                 setData(str(int(totalWords/totalPosts)), str(longestTitle), str(authorWithMostDeletedPosts), str(int(numLetters/threeMinWordCount)))
 
-
-
-
-                '''stub.UpdateRollingAnalytics(streamServer_pb2.RollingAnalyticsRequest(
-                    avgWordLength=str(int(numLetters/threeMinWordCount))
-                ))'''
-
-                itteration = 0
+                startTime = time.time()
                 threeMinWordCount = 0
                 numLetters = 0
             
             else:
-
                 setData(str(int(totalWords/totalPosts)), str(longestTitle), str(authorWithMostDeletedPosts))
 
-                ''' # UpdateRealTimeAnalytics
-                stub.UpdateRealTimeAnalytics(streamServer_pb2.RealTimeAnalyticsRequest(
-                    avgWordsPerPost=str(int(totalWords/totalPosts)),
-                    postWithMostWords=str(longestTitle),
-                    authorWithMostDeletedPosts=str(authorWithMostDeletedPosts)
-                ))'''
-
-            
             threeMinWordCount += len(words)
             numLetters += len(list(''.join(words)))
 
-
-        
 
 if __name__ == '__main__':
     logging.basicConfig()
