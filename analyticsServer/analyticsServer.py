@@ -42,7 +42,6 @@ def run():
         #response = stub.GetData(streamServer_pb2.DataRequest(name='you'))
         for line in stub.GetData(streamServer_pb2.DataRequest(name='you')):
             # Metric 1
-            getData()
 
             title = line.title.strip()
             words = title.split(" ")

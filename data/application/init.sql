@@ -3,8 +3,8 @@ USE microservice;
 CREATE TABLE IF NOT EXISTS data (
     rowID int primary key auto_increment,
     avgWordsPerPost varchar(20),
-    postWithMostWords varchar(255),
-    authorWithMostDeletedPosts varchar(255),
+    postWithMostWords TEXT(65535),
+    authorWithMostDeletedPosts TEXT(65535),
     avgWordLength varchar(255)
     );
 INSERT INTO data VALUES (rowID, "", "", "", "");

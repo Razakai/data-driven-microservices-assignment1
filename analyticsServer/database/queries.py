@@ -3,7 +3,6 @@ from database.database import fetch, execute
 def getData() -> None:
     query = "SELECT * FROM data"
     res = fetch(query)
-    print(res)
 
 
 def setData(avgWordsPerPost, postWithMostWords, authorWithMostDeletedPosts, avgWordLength=None) -> None:

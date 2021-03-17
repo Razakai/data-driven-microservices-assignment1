@@ -1,31 +1,30 @@
 from flask import Flask, render_template, Response
 import logging
 import time
-
-import grpc
-
-import streamServer_pb2
-import streamServer_pb2_grpc
-
-channel = grpc.insecure_channel('grpc_server:50051')
-stub = streamServer_pb2_grpc.DatastreamerStub(channel)
-
-
+from database.queries import getData
 
 app = Flask(__name__)
 
 
-def getAnalytics():
-    while True:
-        time.sleep(5)
-        res = stub.GetAnalytics(streamServer_pb2.DataRequest(name='you'))
-        yield f"{res.analytics}\n\n"
-
-
-
 @app.route('/')
 def index():
-    return Response(getAnalytics(), content_type='text/event-stream')
+    data = getData()
+    return f"""
+    <table>
+        <tr>
+            <th>Average Number Words Per Post</th>
+            <th>Post with Most Words</th>
+            <th>Author Most Deleted Posts</th>
+            <th>Average Word Length - 3 Min</th>
+        </tr>
+        <tr>
+            <td>{data[0][1]}</td>
+            <td>{data[0][2]}</td>
+            <td>{data[0][3]}</td>
+            <td>{data[0][4]}</td>
+        </tr>
+    </table>
+    """
 
 
 

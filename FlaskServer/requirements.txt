@@ -2,3 +2,4 @@ grpcio-tools
 grpcio
 googleapis-common-protos
 flask
+mysql-connector-python

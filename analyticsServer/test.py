@@ -1,8 +1,14 @@
-from database.queries import getData
+from database.queries import getData, setData
 from database.database import execute
+import time
 
 
-getData()
+#setData("qqqq", "wwww", "eeee")
+
+
+while True:
+        print(getData(), '\n\n\n\n\n')
+        time.sleep(2)
 
 
 '''query = """UPDATE data 

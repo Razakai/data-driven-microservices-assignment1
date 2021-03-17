@@ -27,6 +27,7 @@ services:
       - "grpc_server"
       - "mysql"
     command: ["./wait-for-it.sh", "grpc_server:50051", "--", "python", "flaskServer.py"]
+    command: ["./wait-for-it.sh", "mysql:3306", "--", "python", "flaskServer.py"]
   analytics_server:
     build:
       context: ./analyticsServer
