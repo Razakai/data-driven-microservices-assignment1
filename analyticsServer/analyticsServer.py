@@ -39,7 +39,6 @@ def run():
     #with grpc.insecure_channel('grpc_server:50051') as channel:
     with grpc.insecure_channel('grpc_server:50051') as channel:
         stub = streamServer_pb2_grpc.DatastreamerStub(channel)
-        #response = stub.GetData(streamServer_pb2.DataRequest(name='you'))
         for line in stub.GetData(streamServer_pb2.DataRequest(name='you')):
             # Metric 1
 
@@ -51,20 +50,20 @@ def run():
             # Metric 3
             if len(words) > mostWordsInTitle:
                 mostWordsInTitle = len(words)
-                longestTitle = line.title
+                longestTitle = title
 
             
             # Metric 4
-            if line.removed_by != "nan":
+            if line.removed_by != "nan" and line.author != "[deleted]":
                 if line.author in authorDict.keys():
                     authorDict[line.author] += 1
                 else:
                     authorDict[line.author] = 1
             
-            authorDict = dict(sorted(authorDict.items(), key=lambda item: item[1], reverse=True))
-            for key in authorDict.keys():
-                authorWithMostDeletedPosts = key
-                break
+                authorDict = dict(sorted(authorDict.items(), key=lambda item: item[1], reverse=True))
+                for key in authorDict.keys():
+                    authorWithMostDeletedPosts = key
+                    break
 
              # Metric 2
             # Reset every 3 min

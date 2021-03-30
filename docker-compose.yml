@@ -32,8 +32,6 @@ services:
     build:
       context: ./analyticsServer
       dockerfile: Analytics.Dockerfile
-    #links:
-    #  - "mysql:mysql"
     depends_on: 
       - "grpc_server"
       - "mysql"
